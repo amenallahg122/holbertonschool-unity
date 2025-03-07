@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5f; 
     public float jumpForce = 7f;
     public CharacterController controller;
+    public Camera mainCamera;
 
     private Vector3 velocity;
     private bool isGrounded;
@@ -28,7 +29,17 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        Vector3 forward = mainCamera.transform.forward;
+        Vector3 right = mainCamera.transform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward = forward.normalized;
+        right = right.normalized;
+
+        Vector3 move = forward * moveZ + right * moveX;
+
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
