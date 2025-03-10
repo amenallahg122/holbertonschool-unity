@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -34,6 +35,16 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         pauseCanvas.SetActive(false);
         Time.timeScale = 1f;
-        Debug.Log("Game Resumed");
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+
+    public void Options()
+    {
+        SceneManager.LoadScene("Options");
+        Time.timeScale = 1f;
     }
 }
