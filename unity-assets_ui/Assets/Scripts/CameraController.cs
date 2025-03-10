@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     public float height = 2f;
     public float rotationSmoothness = 5f;
     public float maxFallDistance = 20f;
-    public bool isInverted = false;
 
     private float rotationY = 0f;
     private float rotationX = 0f;
@@ -38,7 +37,7 @@ public class CameraController : MonoBehaviour
         rotationY += Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseYInput = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        if (isInverted)
+        if (PlayerPrefs.GetInt("InvertY", 0) == 1)
         {
             mouseYInput = -mouseYInput;
         }
