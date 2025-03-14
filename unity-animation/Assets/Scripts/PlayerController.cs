@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float gravity = -9.81f;
+    public Animator animator;
     
     void Start()
     {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        
         if (transform.position.y < fallThreshold)
         {
             ResetPlayerPosition();
