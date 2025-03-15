@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
-        
         if (transform.position.y < fallThreshold)
         {
             ResetPlayerPosition();
@@ -39,24 +38,33 @@ public class PlayerMovement : MonoBehaviour
         
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
-        
+
         Vector3 forward = mainCamera.transform.forward;
         Vector3 right = mainCamera.transform.right;
         forward.y = 0f;
         right.y = 0f;
         forward = forward.normalized;
         right = right.normalized;
-        
+
         Vector3 move = forward * moveZ + right * moveX;
+
+        if (move.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
+
         controller.Move(move * moveSpeed * Time.deltaTime);
-        
+
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
-        
+
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        animator.SetBool("isRunning", move.magnitude > 0.1f);
     }
     
     public void ResetPlayerPosition()
