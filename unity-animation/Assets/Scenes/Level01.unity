@@ -7949,6 +7949,10 @@ PrefabInstance:
       propertyPath: m_Height
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4475080561442088211, guid: c97fbc62eed1cb84cbf7e3e927f32782, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.11
+      objectReference: {fileID: 0}
     - target: {fileID: 6512444804450301425, guid: c97fbc62eed1cb84cbf7e3e927f32782, type: 3}
       propertyPath: pauseCanvas
       value: 
@@ -7969,6 +7973,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 86034c081d43acd4bba92b27bedaf813, type: 2}
+    - target: {fileID: 7725821111722804170, guid: c97fbc62eed1cb84cbf7e3e927f32782, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1219334777}
     - target: {fileID: 7725821111722804170, guid: c97fbc62eed1cb84cbf7e3e927f32782, type: 3}
       propertyPath: mainCamera
       value: 

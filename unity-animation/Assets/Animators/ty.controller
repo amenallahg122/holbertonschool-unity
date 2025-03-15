@@ -115,9 +115,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: RunningToIdle
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: 
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isRunning
     m_EventTreshold: 0
