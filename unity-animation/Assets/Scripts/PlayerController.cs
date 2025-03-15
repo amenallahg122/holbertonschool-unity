@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float gravity = -9.81f;
     public Animator animator;
+    private bool isJumping = false;
     
     void Start()
     {
@@ -34,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+            if (isJumping) 
+            {
+                isJumping = false;
+                animator.SetBool("isJumping", false);
+            }
         }
         
         float moveX = Input.GetAxis("Horizontal");
@@ -59,12 +65,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            isJumping = true;
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isRunning", false);
         }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        animator.SetBool("isRunning", move.magnitude > 0.1f);
+        if (!isJumping)
+        {
+            animator.SetBool("isRunning", move.magnitude > 0.1f);
+        }
     }
     
     public void ResetPlayerPosition()
