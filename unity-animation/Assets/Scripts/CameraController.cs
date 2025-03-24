@@ -10,19 +10,15 @@ public class CameraController : MonoBehaviour
     public float height = 2f;
     public float rotationSmoothness = 5f;
     public float maxFallDistance = 20f;
-    public float playerRotationSpeed = 5f;
     
     private float rotationY = 0f;
     private float rotationX = 0f;
     private Transform playerTransform;
-    private Vector3 startPosition;
     private PlayerMovement playerMovement;
-    private Vector3 movementDirection;
 
     void Start() 
     {
         playerTransform = player;
-        startPosition = transform.position;
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
@@ -34,17 +30,6 @@ public class CameraController : MonoBehaviour
             {
                 playerMovement.ResetPlayerPosition();
             }
-        }
-
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        
-        movementDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
-
-        if (movementDirection.magnitude > 0.1f) 
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-            player.rotation = Quaternion.Slerp(player.rotation, targetRotation, Time.deltaTime * playerRotationSpeed);
         }
 
         rotationY += Input.GetAxis("Mouse X") * mouseSensitivity;
